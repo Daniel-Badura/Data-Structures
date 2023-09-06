@@ -12,6 +12,6 @@ stringsArray.pop();
 stringsArray.unshift("x");
 
 //Splice
-stringsArray.splice(2, 0, "alien");
+stringsArray.splice(2, 0, "x");
 
 console.log(stringsArray);
