@@ -15,6 +15,6 @@ function maxSubarraySumTS(arr: number[]): number {
   }
   
   // Przykład użycia
-  const array: number[] = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
-  const maximSum: number = maxSubarraySumTS(array);
+  const arrayX: number[] = [-2, 1, -3, 4, -1, 2, 1, -5, 4];
+  const maximSum: number = maxSubarraySumTS(arrayX);
   console.log("Maksymalna suma podciągu to:", maximSum);
