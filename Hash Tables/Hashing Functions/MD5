@@ -1,0 +1,74 @@
+def md5_hash(string):
+    """
+    Calculates the MD5 hash of a string.
+
+    Args:
+        string: The string to be hashed.
+
+    Returns:
+        The MD5 hash of the string, as a hexadecimal string.
+    """
+
+    hash_value = [0x67452301, 0xEFCDAB89, 0x98BADCFE, 0x10325476]
+
+    padding = b"\x80" + b"\x00" * (56 - len(string) % 64)
+    message = string.encode() + padding
+
+    for i in range(0, len(message), 64):
+        chunk = message[i : i + 64]
+        hash_value = _md5_update(hash_value, chunk)
+
+    return _md5_digest(hash_value)
+
+
+def _md5_update(hash_value, chunk):
+    """
+    Updates the MD5 hash value with a chunk of data.
+
+    Args:
+        hash_value: The current hash value.
+        chunk: The chunk of data to be hashed.
+
+    Returns:
+        The updated hash value.
+    """
+
+    A = hash_value[0]
+    B = hash_value[1]
+    C = hash_value[2]
+    D = hash_value[3]
+
+    for i in range(0, len(chunk)):
+        F = (B & C) | (~B & D)
+        g = (B & D) | (C & ~D)
+        h = B ^ C ^ D
+
+        tmp = A + F + ord(chr(i)) + chunk[i]
+        A = D
+        D = C
+        C = B
+        B = tmp + g
+
+    hash_value = [A, B, C, D]
+    return hash_value
+
+
+def _md5_digest(hash_value):
+    """
+    Finalizes the MD5 hash value and returns it as a hexadecimal string.
+
+    Args:
+        hash_value: The current hash value.
+
+    Returns:
+        The MD5 hash value, as a hexadecimal string.
+    """
+
+    digest = ""
+    for byte in hash_value:
+        digest += "%02x" % byte
+
+    return digest
+
+
+print(md5_hash("Hello World!"))
