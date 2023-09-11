@@ -93,6 +93,22 @@ class LinkedList:
             current = current.next
         return result
 
+    def reverse(self):
+        if not self.head or not self.head.next:
+            return  # Empty list or a single element, nothing to reverse
+
+        prev_node = None
+        current_node = self.head
+        while current_node:
+            next_node = current_node.next
+            current_node.next = prev_node
+            current_node.prev = next_node  # Update the previous link
+            prev_node = current_node
+            current_node = next_node
+
+        # After the loop, prev_node will be the new head
+        self.head = prev_node
+
 
 # Example usage:
 linked_list = LinkedList()
@@ -105,3 +121,6 @@ print(linked_list.to_list())  # [0, 1, 3, 2]
 print(linked_list.size())  # 4
 print(linked_list.index_of(3))  # 2
 print(linked_list.is_empty())  # False
+
+linked_list.reverse()
+print(linked_list.to_list())

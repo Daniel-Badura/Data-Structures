@@ -91,6 +91,22 @@ class LinkedList {
       return removedNode;
     }
   }
+  reverse() {
+    if (!this.head.next) {
+      let prev = this.head;
+      this.tail = this.head;
+      let mid = this.head.next;
+
+      while (mid) {
+        const next = mid.next;
+        mid.next = prev;
+        prev = mid;
+        mid = next;
+      }
+      this.head.next = null;
+      this.head = prev;
+    }
+  }
 }
 
 let LinkList = new LinkedList("initial value");
